@@ -12,10 +12,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build mvn
+        working-directory: department-service
         run: |
           mvn clean package -DskipTests
 
       - name: Build and tag Docker image
+        working-directory: department-service
         run: |
           docker build -t department-service:v1 .
 
@@ -32,7 +34,9 @@ jobs:
 
     steps:
       - name: Stop and Remove Existing Containers
+        working-directory: department-service
         run: docker compose down || true  # Ignore errors if no containers are running
 
       - name: Run with Docker Compose
+        working-directory: department-service
         run: docker compose up -d
