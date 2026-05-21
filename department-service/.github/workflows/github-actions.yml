@@ -34,7 +34,9 @@ jobs:
 
     steps:
       - name: Stop and Remove Existing Containers
+        working-directory: department-service
         run: docker compose down || true  # Ignore errors if no containers are running
 
       - name: Run with Docker Compose
+        working-directory: department-service
         run: docker compose up -d
