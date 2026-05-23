@@ -16,7 +16,7 @@ import com.vti.departmentservice.service.IDepartmentService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/api/v1/departments")
+@RequestMapping(value = "/api/v2/departments")
 @RequiredArgsConstructor
 public class DepartmentController {
     private final IDepartmentService dpService;
