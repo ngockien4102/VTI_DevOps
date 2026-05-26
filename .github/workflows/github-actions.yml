@@ -40,8 +40,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Stop and Remove Existing Containers
-        run: docker compose down || true
+      - name: Stop old containers
+        run: |
+          docker compose down
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "No containers to stop"
+          }
+        shell: powershell
 
       - name: Run with Docker Compose
         run: docker compose up -d
