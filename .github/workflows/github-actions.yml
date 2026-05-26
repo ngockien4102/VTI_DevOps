@@ -97,7 +97,12 @@ jobs:
           (Get-Content k8s/deployment.yaml) `
             -replace '\${IMAGE_NAME}', "$env:IMAGE_NAME" `
             -replace '\${IMAGE_TAG}', "$env:IMAGE_TAG" `
+            -replace '\${APP_PORT}', "$env:APP_PORT" `
             | Set-Content k8s/deployment-rendered.yaml
+
+          (Get-Content k8s/service.yaml) `
+            -replace '\${APP_PORT}', "$env:APP_PORT" `
+            | Set-Content k8s/service-rendered.yaml
 
       - name: Deploy to Minikube
         shell: powershell
