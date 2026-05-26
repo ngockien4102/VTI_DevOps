@@ -22,8 +22,7 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Build Docker image
-        shell: bash
-        run: docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        run: docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
 
   deploy-develop:
     runs-on: [self-hosted]
