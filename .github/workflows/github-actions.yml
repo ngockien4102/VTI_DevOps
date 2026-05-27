@@ -85,7 +85,7 @@ jobs:
       - name: Load image into Minikube
         shell: powershell
         run: |
-          minikube image load "${env:IMAGE_NAME}:${env:IMAGE_TAG}"
+          & "C:\minikube\minikube.exe" image load "${env:IMAGE_NAME}:${env:IMAGE_TAG}"
 
       - name: Create or update Kubernetes secret
         shell: powershell
