@@ -9,6 +9,10 @@ on:
 env:
   IMAGE_NAME: department-service
   IMAGE_TAG: ${{ github.sha }}
+  MYSQL_ROOT_PASSWORD: ${{ vars.MYSQL_ROOT_PASSWORD }}
+  MYSQL_DATABASE: ${{ vars.MYSQL_DATABASE }}
+  MYSQL_USER: ${{ vars.MYSQL_USER }}
+  MYSQL_PASSWORD: ${{ vars.MYSQL_PASSWORD }}
 
 jobs:
 
