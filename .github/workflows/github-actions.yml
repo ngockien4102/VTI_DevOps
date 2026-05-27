@@ -40,6 +40,12 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Build Maven
         shell: powershell
         run: |
@@ -124,13 +130,18 @@ jobs:
           (Get-Content k8s/deployment.yaml) `
             -replace '\${IMAGE_NAME}', "$env:IMAGE_NAME" `
             -replace '\${IMAGE_TAG}', "$env:IMAGE_TAG" `
+            -replace '\${APP_PORT}', "$env:APP_PORT" `
             | Set-Content k8s/deployment-rendered.yaml
+
+          (Get-Content k8s/service.yaml) `
+            -replace '\${APP_PORT}', "$env:APP_PORT" `
+            | Set-Content k8s/service-rendered.yaml
 
       - name: Deploy to Minikube
         shell: powershell
         run: |
           kubectl apply -f k8s/deployment-rendered.yaml
-          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/service-rendered.yaml
 
       - name: Restart deployment
         shell: powershell
