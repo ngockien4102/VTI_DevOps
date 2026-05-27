@@ -10,6 +10,8 @@ services:
       - DB_URL=${DB_URL}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - vti-dtn2508
     restart: always
   mysql:
     image: mysql:8.0
