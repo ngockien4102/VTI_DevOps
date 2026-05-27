@@ -18,8 +18,8 @@ services:
     ports:
       - "3308:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=${{var.MYSQL_ROOT_PASSWORD}}
-      - MYSQL_DATABASE=${{var.MYSQL_DATABASE}}
-      - MYSQL_USER=${{var.MYSQL_USER}}
-      - MYSQL_PASSWORD=${{var.MYSQL_PASSWORD}}
+       MYSQL_ROOT_PASSWORD: ${{var.MYSQL_ROOT_PASSWORD}}
+       MYSQL_DATABASE: ${{var.MYSQL_DATABASE}}
+       MYSQL_USER: ${{var.MYSQL_USER}}
+       MYSQL_PASSWORD: ${{var.MYSQL_PASSWORD}}
     restart: always
