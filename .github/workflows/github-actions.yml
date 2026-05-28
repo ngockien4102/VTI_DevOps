@@ -40,11 +40,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
+#      - name: Setup Java 17
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: temurin
+#          java-version: '17'
 
       - name: Build Maven
         shell: powershell
@@ -59,7 +59,18 @@ jobs:
       - name: Stop old containers
         shell: powershell
         run: |
-          docker compose down
+          docker compose stop department-service
+          docker compose rm -f department-service
+#          docker compose down
+
+      - name: Check develop env
+        shell: powershell
+        run: |
+          Write-Host "IMAGE_NAME=$env:IMAGE_NAME"
+          Write-Host "IMAGE_TAG=$env:IMAGE_TAG"
+          Write-Host "APP_PORT=$env:APP_PORT"
+          Write-Host "MYSQL_DATABASE=$env:MYSQL_DATABASE"
+          Write-Host "DB_URL exists:" ($env:DB_URL -ne "")
 
       - name: Run Docker Compose
         shell: powershell
@@ -112,7 +123,8 @@ jobs:
       - name: Check Minikube
         shell: powershell
         run: |
-          & "C:\Program Files\Kubernetes\Minikube\minikube.exe" status kubectl get nodes
+          & "C:\Program Files\Kubernetes\Minikube\minikube.exe" status 
+          kubectl get nodes
        #   & "C:\minikube\minikube.exe" status kubectl get nodes
 
       - name: Load image into Minikube
